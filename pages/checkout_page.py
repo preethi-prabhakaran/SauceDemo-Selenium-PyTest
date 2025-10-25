@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from config.config_reader import first_name, last_name, postal_code
 from pages.base_page import BasePage
 
-
+# Page class for checkout page
 class CheckoutPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)

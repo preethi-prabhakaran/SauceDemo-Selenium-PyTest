@@ -6,6 +6,7 @@ def read_config():
         return yaml.safe_load(f)
 
 config_data = read_config()
+# config.yaml is maintained for a fallback mechanism, in case environment variable is not set. config_reader reads the yaml file and gets the required values
 
 def base_url():
     return os.getenv("BASE_URL", config_data['base_url'])

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
+# Page class for product details page, the page that appears on clicking a particular product from the listed page
 
 class ProductDetailsPage(BasePage):
     def __init__(self, driver):

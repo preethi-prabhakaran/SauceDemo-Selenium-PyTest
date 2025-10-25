@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
-
+# Page class for login page
 class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)

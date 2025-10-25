@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
+# Page class for cart page
 
 class CartPage(BasePage):
     def __init__(self, driver):

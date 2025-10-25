@@ -1,5 +1,6 @@
 # SauceDemo-Selenium-PyTest
-A maintainable test automation framework built with Python, PyTest, and Selenium WebDriver, following the Page Object Model (POM) design pattern. The framework automates functional tests for the SauceDemo  e-commerce site.
+This project implements an end-to-end automated testing framework for the Saucedemo E-commerce Website using Python, Selenium, and Pytest.
+It validates core functionalities like authentication, product browsing, add-to-cart, checkout, and burger menu interactions — packaged with Docker for portability and integrated with Jenkins CI/CD for automated execution and reporting.
 
 Tech Stack
 ---------------
@@ -10,6 +11,8 @@ Automation Tool: Selenium WebDriver
 Design Pattern: Page Object Model (POM)
 Config Management: YAML
 Reporting: Pytest-HTML
+Containerization:	Docker
+CI/CD:	Jenkins
 
 Project Structure
 --------------------
@@ -28,9 +31,10 @@ Project Structure
 │
 ├── utils/
 │   └── create_driver.py     # WebDriver setup (Chrome)
-│
-├── pytest.ini               # Pytest options and HTML report config
-├── requirements.txt
+├── Dockerfile                   # Builds test environment image
+├── Jenkinsfile                  # Defines CI/CD pipeline
+├── pytest.ini                   # Pytest reporting configuration (HTML & JUnit reporting)
+├── requirements.txt             # Python dependencies
 └── README.md
 
 
@@ -55,6 +59,24 @@ pytest -v
 Run a specific test:
 pytest tests/test_login.py::test_valid_login
 
+How to runn Tests with Docker
+------------------------------
+1️. Build Docker Image
+docker build -t saucedemo-test .
+
+2️. Run Tests in Container
+docker run --rm -e BASE_URL="https://www.saucedemo.com/" -e HEADLESS="true" -v "${PWD}/reports:/app/results" saucedemo-test
+Reports are generated under reports/report.html on your host machine.
+
+Jenkins CI/CD Integration
+---------------------------
+
+The Jenkinsfile automates the following stages:
+1. Checkout source code from Git.
+2. Build Docker image containing the test framework.
+3. Run tests inside the Docker container.
+4. Publish pytest-html report in Jenkins.
+
 
 Future Enhancements
 ----------------------
@@ -62,4 +84,4 @@ Future Enhancements
 * Add multi-browser support (Edge, Firefox)
 * Add parametrized test cases
 * Marking of test cases (smoke, sanity, regression etc)
-* Integrate CI/CD pipeline
+* Integrate Allure Reports for enhanced visualization.

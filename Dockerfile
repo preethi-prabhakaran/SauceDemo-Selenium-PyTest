@@ -27,4 +27,5 @@ ENV BROWSER_NAME="chrome"
 ENV HEADLESS="true"
 
 # Run pytest automatically when the container starts
-ENTRYPOINT ["pytest", "-v", "--headless=true"]
+ENTRYPOINT ["pytest"]
+CMD ["-v", "--html=/app/results/report.html", "--self-contained-html", "--tb=short", "--junitxml=/app/results/junit.xml"]

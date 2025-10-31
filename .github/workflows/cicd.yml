@@ -32,11 +32,7 @@ jobs:
       - name: Run pytest inside container
         run: |
           mkdir -p reports
-          docker run --rm `
-            -e BASE_URL=${{ env.BASE_URL }} `
-            -e HEADLESS=${{ env.HEADLESS }} `
-            -v "${{ github.workspace }}\reports:/app/reports" `
-            saucedemo-tests pytest -v --html=/app/reports/report.html --self-contained-html
+          docker run --rm -e BASE_URL=${{ env.BASE_URL }} -e HEADLESS=${{ env.HEADLESS }} -v "${{ github.workspace }}\reports:/app/reports" saucedemo-tests pytest -v --html=/app/reports/report.html --self-contained-html
 
       # Step 5: Upload pytest-html report as an artifact
       - name: Upload HTML test report

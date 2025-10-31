@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-docker-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
       BASE_URL: "https://www.saucedemo.com/"

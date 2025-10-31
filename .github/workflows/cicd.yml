@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-docker-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
       BASE_URL: "https://www.saucedemo.com/"
@@ -31,12 +31,8 @@ jobs:
       # Step 4: Run tests inside Docker
       - name: Run pytest inside container
         run: |
-          mkdir reports
-          docker run --rm `
-            -e BASE_URL=${{ env.BASE_URL }} `
-            -e HEADLESS=${{ env.HEADLESS }} `
-            -v "${{ github.workspace }}\reports:/app/reports" `
-            saucedemo-tests pytest -v --html=/app/reports/report.html --self-contained-html
+          mkdir -p reports
+          docker run --rm -e BASE_URL=${{ env.BASE_URL }} -e HEADLESS=${{ env.HEADLESS }} -v "${{ github.workspace }}\reports:/app/reports" saucedemo-tests
 
       # Step 5: Upload pytest-html report as an artifact
       - name: Upload HTML test report
@@ -45,6 +41,6 @@ jobs:
           name: pytest-html-report
           path: reports/report.html
 
-      # Step 6: View the report link in Summary
+      # Step 6: View the report artifact link in test-run summary
       - name: Add report link to summary
         run: echo "✅ [View HTML Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY

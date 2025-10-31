@@ -31,7 +31,7 @@ jobs:
       # Step 4: Run tests inside Docker
       - name: Run pytest inside container
         run: |
-          mkdir reports
+          mkdir -p reports
           docker run --rm `
             -e BASE_URL=${{ env.BASE_URL }} `
             -e HEADLESS=${{ env.HEADLESS }} `

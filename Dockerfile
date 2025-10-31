@@ -1,5 +1,5 @@
 # Base image with Python and Google Chrome
-FROM python:3.10-slim
+FROM python:3.9
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1

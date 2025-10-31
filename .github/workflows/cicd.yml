@@ -41,6 +41,6 @@ jobs:
           name: pytest-html-report
           path: reports/report.html
 
-      # Step 6: View the report link in Summary
+      # Step 6: View the report artifact link in test-run summary
       - name: Add report link to summary
         run: echo "✅ [View HTML Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY

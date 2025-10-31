@@ -1,6 +1,6 @@
 # SauceDemo-Selenium-PyTest
 This project implements an end-to-end automated testing framework for the Saucedemo E-commerce Website using Python, Selenium, and Pytest.
-It validates core functionalities like authentication, product browsing, add-to-cart, checkout, and burger menu interactions — packaged with Docker for portability and integrated with Jenkins CI/CD for automated execution and reporting.
+It validates core functionalities like authentication, product browsing, add-to-cart, checkout, and burger menu interactions — packaged with Docker for portability and integrated with Jenkins and GitHub Actions for CI/CD - for automated execution and reporting.
 
 Tech Stack
 ---------------
@@ -12,7 +12,7 @@ Design Pattern: Page Object Model (POM)
 Config Management: YAML
 Reporting: Pytest-HTML
 Containerization:	Docker
-CI/CD:	Jenkins
+CI/CD: Jenkins and GitHub Actions
 
 Project Structure
 --------------------
@@ -33,6 +33,7 @@ Project Structure
 │   └── create_driver.py     # WebDriver setup (Chrome)
 ├── Dockerfile                   # Builds test environment image
 ├── Jenkinsfile                  # Defines CI/CD pipeline
+├── .github/workflows/ci.yml    # GitHub Actions CI workflow
 ├── pytest.ini                   # Pytest reporting configuration (HTML & JUnit reporting)
 ├── requirements.txt             # Python dependencies
 └── README.md
@@ -68,20 +69,26 @@ docker build -t saucedemo-test .
 docker run --rm -e BASE_URL="https://www.saucedemo.com/" -e HEADLESS="true" -v "${PWD}/reports:/app/results" saucedemo-test
 Reports are generated under reports/report.html on your host machine.
 
-Jenkins CI/CD Integration
+CI/CD Integration
 ---------------------------
-
+Jenkins:
 The Jenkinsfile automates the following stages:
 1. Checkout source code from Git.
 2. Build Docker image containing the test framework.
 3. Run tests inside the Docker container.
 4. Publish pytest-html report in Jenkins.
 
+GitHub Actions:
+1. Click Actions tab on the repository page
+2. Click on the workflow listed (Saucedemo Automation)
+3. Manually trigger it by clicking “Run workflow” (since workflow_dispatch is included), select branch main. It runs automatically on every push or pull request.
+After the Workflow:
+Go to Actions → Workflow Run → Artifacts → pytest-html-report
+Download and unzip artifacts locally for the detailed test report (report.html)
 
 Future Enhancements
 ----------------------
 
 * Add multi-browser support (Edge, Firefox)
-* Add parametrized test cases
 * Marking of test cases (smoke, sanity, regression etc)
 * Integrate Allure Reports for enhanced visualization.
